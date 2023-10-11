@@ -1,0 +1,26 @@
+
+.total-expense-card {
+    border: 2px solid #f50057; 
+    background: rgb(255, 199, 199);
+
+    padding: 10px;
+    margin: 10px;
+    width: 70%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+    transition: all 0.3s ease; 
+
+
+}
+
+.total-expense-card:hover {
+    transform: scale(1.05); 
+} 
+ 
+
+.card-bg{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+}

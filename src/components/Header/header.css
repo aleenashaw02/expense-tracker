@@ -1,0 +1,27 @@
+header { 
+    color: #FF6D60;
+    background-color: #F8FFDB;
+    padding: 10px;
+    font-family: 'Crimson Pro', serif;
+    font-size: larger;
+    position: sticky; top: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.header-left {
+    padding-left: 20px;
+}
+
+.header-right {
+    padding-right: 20px;
+}
+
+.header-right img {
+    max-height: 80px; 
+    max-width: 100%; 
+}
