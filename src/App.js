@@ -1,23 +1,26 @@
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Header from './components/Header/header'
 import Footer from './components/Footer/footer';
 import CardContainer from './components/CardContainer/card-container';
 import Balance from './components/Balance/balance' ;
-import TotalExpenseCard from './components/TotalExpenseCard/total-expense-card';
-import sampledata from "./sample-data.json"
-import GreatestAmount from './components/GreatestAmount/greatest-amount';
+// import TotalExpenseCard from './components/TotalExpenseCard/total-expense-card';
+import sampleData from './sample-data.json'
+import AddExpenseCard from './components/AddExpenseCard/add-expense'
+import LocationInfo from './LocationInfo/locationinfo';
+
 function App() {
+
+  const [expenses, setExpenses] = useState(sampleData);
+
   //total amount
-  let totalamount=0;
-  sampledata.forEach(value=> {
-    totalamount+=parseFloat(value.amount.replace ("$", ""));
-  });
+  let totalamount = sampleData.reduce((total, value) => total + value.amount, 0);
 
   //greatest amount
-  const result = sampledata.reduce((acc, { date, amount }) => {
-    const parsedAmount = parseFloat(amount.replace("$", ""));
+  const result = sampleData.reduce((acc, { date, amount }) => {
+
     if (!acc[date]) acc[date] = 0;
-    acc[date] += parsedAmount;
+    acc[date] += amount;
     return acc;
   }, {});
 
@@ -29,12 +32,21 @@ function App() {
 
   console.log(dateWithMaxAmount, maxAmount);
 
+//new expense
+  const addNewExpense = (newExpense) => {
+    const id = Date.now().toString();
+    const updatedExpenses = [...expenses, { ...newExpense, id }];
+    setExpenses(updatedExpenses);
+  };
+
   return (
     <div className="App">
       <Header/>
-      <TotalExpenseCard totalExpense={totalamount} />
-      <GreatestAmount greatestDate={dateWithMaxAmount} greatestExpense={maxAmount}/>
-      <CardContainer data= {sampledata}/>
+      <LocationInfo/>
+      <AddExpenseCard onAddExpense={addNewExpense} />
+      {/* <TotalExpenseCard totalExpense={totalamount} /> */}
+      {/* <GreatestAmount greatestDate={dateWithMaxAmount} greatestExpense={maxAmount}/> */}
+      <CardContainer data= {expenses} setExpenses={setExpenses}/>
       <Footer/>
     </div>
   );
